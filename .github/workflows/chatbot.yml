@@ -15,10 +15,11 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { context, github } = require('@actions/github');
             const issue = context.issue;
             const message = 'Thank you for opening this issue! We will look into it shortly.';
             
-            await github.issues.createComment({
+            await github.rest.issues.createComment({
               ...issue,
               body: message
             });
