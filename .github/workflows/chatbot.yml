@@ -1,0 +1,24 @@
+name: Issue Commenter
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Add comment to issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.issue;
+            const message = 'Thank you for opening this issue! We will look into it shortly.';
+            
+            await github.issues.createComment({
+              ...issue,
+              body: message
+            });
