@@ -20,6 +20,8 @@ jobs:
             const message = 'Thank you for opening this issue! We will look into it shortly.';
             
             await github.rest.issues.createComment({
-              ...issue,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
               body: message
             });
